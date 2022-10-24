@@ -23,6 +23,8 @@ public abstract class Transport {
 
     public abstract void finish();
 
+    public abstract void type();
+
     public String getBrand() {
         return brand;
     }
