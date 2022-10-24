@@ -32,4 +32,36 @@ public class Truck extends Transport implements Competing{
     public void finish() {
         System.out.printf("Finish %s %s", getModel(),getBrand());
     }
+
+    @Override
+    public String getBrand() {
+        return super.getBrand();
+    }
+
+    @Override
+    public String getModel() {
+        return super.getModel();
+    }
+
+    @Override
+    public float getEngineVolume() {
+        return super.getEngineVolume();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
+
+

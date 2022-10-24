@@ -23,6 +23,18 @@ public abstract class Transport {
 
     public abstract void finish();
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public float getEngineVolume() {
+        return engineVolume;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,15 +57,5 @@ public abstract class Transport {
                 '}';
     }
 
-    public String getBrand() {
-        return brand;
-    }
 
-    public String getModel() {
-        return model;
-    }
-
-    public float getEngineVolume() {
-        return engineVolume;
-    }
 }

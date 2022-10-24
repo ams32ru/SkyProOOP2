@@ -48,5 +48,6 @@ public abstract class Driver<T extends Transport> {
         return java.lang.String.format("Водитель %s управляет автомобилем %s %s и будет участвовать в заезде",
                 getDriverName(), car.getBrand(), car.getModel());
     }
+
 }
 

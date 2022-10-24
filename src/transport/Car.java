@@ -23,6 +23,21 @@ public class Car extends Transport implements Competing {
     }
 
     @Override
+    public String getBrand() {
+        return super.getBrand();
+    }
+
+    @Override
+    public String getModel() {
+        return super.getModel();
+    }
+
+    @Override
+    public float getEngineVolume() {
+        return super.getEngineVolume();
+    }
+
+    @Override
     public boolean equals(Object o) {
         return super.equals(o);
     }
@@ -51,7 +66,9 @@ public class Car extends Transport implements Competing {
     public int getMaxSpeed() {
         return ThreadLocalRandom.current().nextInt(60, 300);
     }
+
 }
+
 
 
 
