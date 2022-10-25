@@ -35,6 +35,11 @@ public class Truck extends Transport implements Competing {
     }
 
     @Override
+    public boolean texService() {
+        return Math.random()>0.5;
+    }
+
+    @Override
     public void start() {
         System.out.printf("Start %s %s", getModel(), getBrand());
     }
