@@ -4,8 +4,10 @@ import drivers.DriverC;
 import drivers.DriverD;
 import transport.*;
 
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws WrongLoginException, WrongPasswordException {
 
         Bus bus1 = new Bus("Иж", "Т900", 3.2f, BusCapacityType.LARGE);
         Bus bus2 = new Bus("Иш", "Т800", 3.0f, BusCapacityType.MEDIUM);
@@ -13,15 +15,20 @@ public class Main {
         Bus bus4 = new Bus("Ир", "Т600", 2.6f, BusCapacityType.EXTRA_SMALL);
 
         Car bmv = new Car("BMW", "X6", 2.8f, BodyType.COUPE);
-        Car kia = new Car("KIA", "CEED", 1.6f,BodyType.HATCHBACK);
-        Car lada = new Car("Lada", "99", 1.4f,BodyType.SEDAN);
-        Car volvo = new Car("Volvo", "хс90", 2.2f,BodyType.CROSSOVER);
+        Car kia = new Car("KIA", "CEED", 1.6f, BodyType.HATCHBACK);
+        Car lada = new Car("Lada", "99", 1.4f, BodyType.SEDAN);
+        Car volvo = new Car("Volvo", "хс90", 2.2f, BodyType.CROSSOVER);
 
         Truck kamaz = new Truck("КамАЗ", "4310", 10.8f, TruckLoadCapacity.N3);
         Truck gaz = new Truck("ГАЗ", "66", 4.2f, TruckLoadCapacity.N1);
         Truck zil = new Truck("ЗИЛ", "130", 6.0f, TruckLoadCapacity.N2);
         Truck maz = new Truck("МАЗ", "5516", 8.0f, TruckLoadCapacity.N2);
 
+        servis(
+                bmv, kia, lada, volvo,
+                kamaz, gaz, zil, maz,
+                bus1, bus2, bus3, bus4
+        );
 
         Driver mike = new DriverB("Mike", 4, bmv);
         System.out.println("mike = " + mike);
@@ -37,5 +44,24 @@ public class Main {
         bus2.type();
         volvo.type();
 
+        // Data.inputLog();
+        servis();
+
     }
+    public static void servis(Transport... transports) {
+        for (Transport transport : transports) {
+            servisPrintExpention(transport);
+        }
+    }
+
+    public static void servisPrintExpention(Transport transports) {
+        try {
+            if (!transports.texService()) {
+                throw new RuntimeException(transports.getBrand() + "" + transports.getModel() + " Не прошшел диагностику");
+            }
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

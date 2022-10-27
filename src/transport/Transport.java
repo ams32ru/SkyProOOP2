@@ -3,9 +3,9 @@ package transport;
 import java.util.Objects;
 
 public abstract class Transport {
-    private    String brand;
-    private    String model;
-    private  float engineVolume;
+    private String brand;
+    private String model;
+    private float engineVolume;
 
     public Transport(String brand, String model, float engineVolume) {
         if (brand != null && !brand.isBlank()) {
@@ -18,6 +18,8 @@ public abstract class Transport {
             this.engineVolume = engineVolume;
         }
     }
+
+    public abstract boolean texService();
 
     public abstract void start();
 
