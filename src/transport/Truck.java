@@ -88,6 +88,11 @@ public class Truck extends Transport implements Competing {
     public String toString() {
         return super.toString();
     }
+
+    @Override
+    public void repaer() {
+        System.out.println("Грузовик " + getBrand() + getModel()+ " отремонтирован");
+    }
 }
 
 

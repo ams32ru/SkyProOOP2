@@ -1,8 +1,5 @@
 package transport;
 
-import java.time.LocalDate;
-import java.util.Objects;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Car extends Transport implements Competing {
@@ -76,6 +73,11 @@ public class Car extends Transport implements Competing {
     public String toString() {
         return super.toString() + " Тип кузова: "
                 + getBodyType();
+    }
+
+    @Override
+    public void repaer() {
+        System.out.println("Автомобиль " + getBrand() + getModel()+ " отремонтированна");
     }
 
     @Override
