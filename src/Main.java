@@ -9,23 +9,30 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws WrongLoginException, WrongPasswordException {
 
-
         Sponsor coccaColla = new Sponsor("Cocca Colla", 3_000_000);
         Sponsor ferrary = new Sponsor("Ferrary ", 5_000_000);
         Sponsor redbyll = new Sponsor("Red Byll", 2_000_000);
         Sponsor twics = new Sponsor("Twics", 1_000_000);
+
+        Sponsor.add2(coccaColla);
+        Sponsor.add2(ferrary);
+        Sponsor.add2(redbyll);
+        Sponsor.add2(twics);
 
         Mechanic petr = new Mechanic("Петр петров", "БМЗ");
         Mechanic semen = new Mechanic("Семен Семеныч", "Стройлон");
         Mechanic<Truck> oksana = new Mechanic("Оксана Петровна", "Лукойл");
         Mechanic sergey = new Mechanic("Сергей Романов", "ООО Рога и копыта");
 
-
+        Mechanic.addMechanics(petr);
+        Mechanic.addMechanics(semen);
+        Mechanic.addMechanics(oksana);
+        Mechanic.addMechanics(sergey);
 
         Bus bus1 = new Bus("Иж", "Т900", 3.2f, BusCapacityType.LARGE);
         bus1.addDriver(new DriverD("Foyks", 23, bus1));
-        bus1.addMechanic(petr,semen);
-        bus1.addSponsor(twics,coccaColla);
+        bus1.addMechanic(petr, semen);
+        bus1.addSponsor(twics, coccaColla);
         Bus bus2 = new Bus("Иш", "Т800", 3.0f, BusCapacityType.MEDIUM);
         Bus bus3 = new Bus("Им", "Т700", 2.8f, BusCapacityType.MEDIUM);
         Bus bus4 = new Bus("Ир", "Т600", 2.6f, BusCapacityType.EXTRA_SMALL);
@@ -44,23 +51,19 @@ public class Main {
 
         Truck kamaz = new Truck("КамАЗ", "4310", 10.8f, TruckLoadCapacity.N3);
         kamaz.addDriver(new DriverC("Саня", 2, kamaz));
-        kamaz.addMechanic(semen,oksana);
+        kamaz.addMechanic(semen, oksana);
         kamaz.addSponsor(redbyll);
         Truck gaz = new Truck("ГАЗ", "66", 4.2f, TruckLoadCapacity.N1);
         Truck zil = new Truck("ЗИЛ", "130", 6.0f, TruckLoadCapacity.N2);
         Truck maz = new Truck("МАЗ", "5516", 8.0f, TruckLoadCapacity.N2);
 
+        Driver.addDriver(new DriverB("Володя", 22, lada));
+        Driver.addDriver(new DriverD("Tamara", 5, bus1));
+        Driver.addDriver(new DriverC("Vovka", 9, zil));
+
         List<Transport> transports = List.of(bmv, kia, lada, volvo,
                 kamaz, gaz, zil, maz,
-                bus1, bus2, bus3, bus4)
-                ;
-        List<Driver> drivers = new ArrayList<>();
-        drivers.add(new DriverB("Володя", 22, lada));
-        drivers.add(new DriverD("Tamara", 5, bus1));
-        drivers.add(new DriverC("Vovka", 9, zil));
-
-        List<Sponsor> sponsors = List.of(coccaColla, ferrary, redbyll, twics);
-        List<Mechanic> mechanics = List.of(petr, semen, sergey, oksana);
+                bus1, bus2, bus3, bus4);
 
         for (Transport transport : transports) {
             printInfo(transport);
@@ -71,9 +74,6 @@ public class Main {
         serviceStation.addCar(lada);
         serviceStation.addTruck(kamaz);
 //        serviceStation.carInspection();
-
-
-
 
 //        servis(
 //                bmv, kia, lada, volvo,
@@ -100,15 +100,15 @@ public class Main {
 
         Queue<String> cashier1 = new ArrayDeque<>();
         Queue<String> cashier2 = new ArrayDeque<>();
-       randomFilling(cashier1);
-       randomFilling(cashier2);
+        randomFilling(cashier1);
+        randomFilling(cashier2);
         System.out.println("Очередь 1" + cashier1);
         System.out.println("Очередь 2" + cashier2);
 
-        addPeople("Сеня", cashier1,cashier2);
+        addPeople("Сеня", cashier1, cashier2);
         System.out.println("Очередь 1" + cashier1);
         System.out.println("Очередь 2" + cashier2);
-        removePeople(cashier1,cashier2);
+        removePeople(cashier1, cashier2);
         System.out.println("Очередь 1" + cashier1);
         System.out.println("Очередь 2" + cashier2);
 
@@ -117,7 +117,7 @@ public class Main {
 
     // задача по супермаркету
 
-    private static final List<String> PEOPLE =  List.of("Человек1","Человек2","Человек3","Человек4","Человек5","Человек6","Человек7","Человек8" );
+    private static final List<String> PEOPLE = List.of("Человек1", "Человек2", "Человек3", "Человек4", "Человек5", "Человек6", "Человек7", "Человек8");
 
     public static final Random RANDOM = new Random();
 
@@ -127,7 +127,7 @@ public class Main {
         } else if (cashier2.size() < cashier1.size()) {
             cashier2.offer(people);
         } else {
-            System.out.println( "Галллляяя");
+            System.out.println("Галллляяя");
         }
     }
 
@@ -146,10 +146,6 @@ public class Main {
         }
     }
 
-
-
-
-
     public static void servis(Transport... transports) {
         for (Transport transport : transports) {
             servisPrintExpention(transport);
@@ -167,7 +163,7 @@ public class Main {
     }
 
     public static void printInfo(Transport transport) {
-        System.out.println("Информация по афтомобилю: "+ transport.getBrand() + " " + transport.getModel());
+        System.out.println("Информация по афтомобилю: " + transport.getBrand() + " " + transport.getModel());
         System.out.println("Водители:");
         for (Driver<?> driver : transport.getDrivers()) {
             System.out.println(driver.getDriverName());
@@ -177,16 +173,17 @@ public class Main {
             System.out.println(sponsor.getSponsorName());
         }
         System.out.println("Механики: ");
-        for (Mechanic<?> mechanic: transport.getMechanics()){
-            System.out.println(mechanic.getFullNameMech() +" из компании " + mechanic.getCompany());
+        for (Mechanic<?> mechanic : transport.getMechanics()) {
+            System.out.println(mechanic.getFullNameMech() + " из компании " + mechanic.getCompany());
         }
     }
+
     public static void example() {
         List<List<String>> biDemArrList = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             biDemArrList.add(i, new ArrayList<>());
             for (int j = 0; j < 8; j++) {
-                biDemArrList.get(i).add(j, (i+j)%2==1?"●":"◯");
+                biDemArrList.get(i).add(j, (i + j) % 2 == 1 ? "●" : "◯");
             }
         }
         for (int i = 0; i < 8; i++) {

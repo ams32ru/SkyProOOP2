@@ -1,6 +1,8 @@
 package transport;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Sponsor {
     private final String sponsorName;
@@ -10,6 +12,17 @@ public class Sponsor {
         this.sponsorName = sponsorName;
         this.donation = donation;
     }
+
+   public static Set<Sponsor> sponsors =  new HashSet<>();
+    public static void add2(Sponsor spon) {
+        for (Sponsor i : sponsors) {
+            if (sponsors.contains(spon)) {
+                throw new IllegalArgumentException("Такой cпонсор уже добавлен");
+            }
+        }
+        sponsors.add(spon);
+    }
+
 
     public String getSponsorName() {
         return sponsorName;

@@ -1,6 +1,10 @@
 package drivers;
 
+import transport.Mechanic;
 import transport.Transport;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Driver<T extends Transport> {
     private final String driverName;
@@ -15,6 +19,15 @@ public abstract class Driver<T extends Transport> {
         this.experienceYears = experienceYears;
         this.car = car;
         setCategory(category);
+    }
+
+   public static Set<Driver> drivers = new HashSet<>();
+    public static void addDriver(Driver driv) {
+        for (Driver mechanic : drivers) {
+            if (drivers.contains(driv)) {
+                throw new IllegalArgumentException("Механик уже добавлен");
+            } else drivers.add(driv);
+        }
     }
 
     public  void startUp() {

@@ -1,6 +1,9 @@
 package transport;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Mechanic < T extends Transport>{
 
@@ -10,6 +13,16 @@ public class Mechanic < T extends Transport>{
     public Mechanic(String fullNameMech, String company) {
         this.fullNameMech = fullNameMech;
         this.company = company;
+    }
+
+    public static Set<Mechanic> mechanics = new HashSet<>();
+
+    public static void addMechanics(Mechanic mex) {
+        for (Mechanic mechanic : mechanics) {
+            if (mechanics.contains(mex)) {
+                throw new IllegalArgumentException("Механик уже добавлен");
+            } else mechanics.add(mex);
+        }
     }
 
     public String getFullNameMech() {
